@@ -1,0 +1,3 @@
+{% if produto.estoque == 0 %}<span class="selo selo-esgotado">Esgotado</span>
+{% elif produto.estoque <= 3 %}<span class="selo selo-pouco">{% if produto.estoque == 1 %}Última unidade{% else %}Últimas {{ produto.estoque }} unidades{% endif %}</span>
+{% else %}<span class="selo selo-ok">{{ produto.estoque }} em estoque</span>{% endif %}

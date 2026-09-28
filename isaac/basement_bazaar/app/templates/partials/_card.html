@@ -1,0 +1,22 @@
+<article class="item-card h-100">
+  <a href="{% url 'produto_detalhe' produto.pk %}" class="palco" tabindex="-1" aria-hidden="true">
+    {% include "partials/_imagem.html" %}
+    <span class="pedestal"></span>
+  </a>
+  <div class="item-corpo">
+    <span class="categoria">{{ produto.get_categoria_display }}</span>
+    <h3 class="item-nome"><a href="{% url 'produto_detalhe' produto.pk %}">{{ produto.nome }}</a></h3>
+    <p class="item-desc">{{ produto.descricao|truncatechars:90 }}</p>
+    <div class="item-rodape">
+      <span class="preco">{{ produto.preco|floatformat:"-2" }} <abbr title="moedas">¢</abbr></span>
+      {% include "partials/_estoque.html" %}
+    </div>
+    <div class="item-acoes">
+      <a href="{% url 'produto_detalhe' produto.pk %}" class="btn btn-osso btn-sm">Ver detalhes</a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'produto_editar' produto.pk %}" class="btn btn-osso btn-sm">Editar</a>
+      <a href="{% url 'produto_excluir' produto.pk %}" class="btn btn-perigo btn-sm">Excluir</a>
+      {% endif %}
+    </div>
+  </div>
+</article>

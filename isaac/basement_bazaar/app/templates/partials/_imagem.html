@@ -1,0 +1,8 @@
+{% if produto.imagem %}
+<img src="{{ produto.imagem }}" alt="{{ produto.nome }}" class="sprite" loading="lazy">
+{% else %}
+<svg class="sprite sprite-vazio" viewBox="0 0 64 64" role="img" aria-label="{{ produto.nome }} (sem imagem)">
+  <path d="M32 6C32 6 12 30 12 42a20 20 0 0 0 40 0C52 30 32 6 32 6z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <text x="32" y="50" text-anchor="middle" font-size="26" fill="currentColor" font-family="Pirata One, serif">?</text>
+</svg>
+{% endif %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Status &mdash; Basement Bazaar{% endblock %}
+
+{% block content %}
+<section class="container secao">
+  <div class="caixa caixa-estreita">
+    <h1 class="mb-4">Status do sistema</h1>
+    <dl class="ficha">
+      <div><dt>Situação</dt><dd>{{ status_sistema }}</dd></div>
+      <div><dt>Servidor</dt><dd>{{ id_servidor }}</dd></div>
+      <div><dt>Banco de dados</dt><dd>{{ banco }}</dd></div>
+      <div><dt>Itens cadastrados</dt><dd>{{ total_itens|default_if_none:"-" }}</dd></div>
+      <div><dt>Itens esgotados</dt><dd>{{ esgotados|default_if_none:"-" }}</dd></div>
+      <div><dt>Versão do Django</dt><dd>{{ versao_django }}</dd></div>
+      <div><dt>Hora do servidor</dt><dd>{{ agora|date:"d/m/Y H:i:s" }}</dd></div>
+    </dl>
+  </div>
+</section>
+{% endblock %}

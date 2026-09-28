@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Excluir {{ produto.nome }} &mdash; Basement Bazaar{% endblock %}
+
+{% block content %}
+<section class="container secao">
+  <div class="caixa caixa-perigo">
+    <h1 class="mb-3">Excluir este item?</h1>
+    <p>
+      <strong>{{ produto.nome }}</strong> será removido do catálogo. Essa ação não pode ser desfeita.
+    </p>
+    <form method="post" class="d-flex flex-wrap gap-2 mt-4">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-perigo">Excluir definitivamente</button>
+      <a href="{% url 'produto_detalhe' produto.pk %}" class="btn btn-osso">Cancelar</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

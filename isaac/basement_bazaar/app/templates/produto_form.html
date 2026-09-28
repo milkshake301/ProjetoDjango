@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }} &mdash; Basement Bazaar{% endblock %}
+
+{% block content %}
+<section class="container secao">
+  <div class="caixa form-isaac">
+    <h1 class="mb-4">{{ titulo }}</h1>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="preview" id="preview" {% if not form.imagem.value %}hidden{% endif %}>
+        <div class="palco palco-mini"><img id="preview-img" class="sprite" alt="Prévia da imagem" src="{{ form.imagem.value|default:'' }}"><span class="pedestal"></span></div>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 mt-4">
+        <button type="submit" class="btn btn-isaac">Salvar</button>
+        <a href="{% if produto %}{% url 'produto_detalhe' produto.pk %}{% else %}{% url 'produtos' %}{% endif %}" class="btn btn-osso">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Prévia da imagem enquanto a URL é digitada.
+  (function () {
+    var campo = document.getElementById('id_imagem');
+    var caixa = document.getElementById('preview');
+    var img = document.getElementById('preview-img');
+    if (!campo) return;
+    campo.addEventListener('input', function () {
+      var url = campo.value.trim();
+      caixa.hidden = !url;
+      if (url) img.src = url;
+    });
+  })();
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Catálogo &mdash; Basement Bazaar{% endblock %}
+
+{% block content %}
+<section class="container secao">
+  <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+    <div>
+      <h1 class="mb-1">Catálogo</h1>
+      <p class="text-body-secondary mb-0">{{ produtos|length }} item{{ produtos|length|pluralize:",ns" }} encontrado{{ produtos|length|pluralize }}.</p>
+    </div>
+    {% if user.is_authenticated %}
+    <a href="{% url 'produto_criar' %}" class="btn btn-isaac">Cadastrar item</a>
+    {% endif %}
+  </div>
+
+  <form method="get" class="filtros form-isaac" role="search">
+    <div>
+      <label for="q">Buscar</label>
+      <input type="search" id="q" name="q" value="{{ q }}" placeholder="Nome ou descrição">
+    </div>
+    <div>
+      <label for="categoria">Categoria</label>
+      <select id="categoria" name="categoria">
+        <option value="">Todas</option>
+        {% for valor, rotulo in categorias %}
+        <option value="{{ valor }}" {% if valor == categoria_atual %}selected{% endif %}>{{ rotulo }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filtros-acoes">
+      <button type="submit" class="btn btn-isaac">Filtrar</button>
+      {% if q or categoria_atual %}<a href="{% url 'produtos' %}" class="btn btn-osso">Limpar</a>{% endif %}
+    </div>
+  </form>
+
+  <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+    {% for produto in produtos %}
+    <div class="col">{% include "partials/_card.html" %}</div>
+    {% empty %}
+    <div class="col-12">
+      <div class="vazio">
+        {% if q or categoria_atual %}
+        <p class="mb-2">Nenhum item corresponde a esse filtro.</p>
+        <a href="{% url 'produtos' %}" class="btn btn-osso">Limpar filtros</a>
+        {% else %}
+        <p class="mb-2">O catálogo está vazio.</p>
+        {% if user.is_authenticated %}<a href="{% url 'produto_criar' %}" class="btn btn-isaac">Cadastrar item</a>{% endif %}
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

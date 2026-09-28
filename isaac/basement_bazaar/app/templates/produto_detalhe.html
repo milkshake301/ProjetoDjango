@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}{{ produto.nome }} &mdash; Basement Bazaar{% endblock %}
+
+{% block content %}
+<section class="container secao">
+  <nav aria-label="Você está em" class="mb-4">
+    <a href="{% url 'produtos' %}" class="link-osso">&larr; Voltar ao catálogo</a>
+  </nav>
+
+  <div class="detalhe">
+    <div class="palco palco-grande">
+      {% include "partials/_imagem.html" %}
+      <span class="pedestal"></span>
+    </div>
+
+    <div>
+      <span class="categoria">{{ produto.get_categoria_display }}</span>
+      <h1 class="mb-3">{{ produto.nome }}</h1>
+      <p class="detalhe-desc">{{ produto.descricao|default:"Este item ainda não tem descrição." }}</p>
+
+      <dl class="ficha">
+        <div><dt>Preço</dt><dd class="preco">{{ produto.preco|floatformat:"-2" }} <abbr title="moedas">¢</abbr></dd></div>
+        <div><dt>Estoque</dt><dd>{% include "partials/_estoque.html" %}</dd></div>
+        <div><dt>Cadastrado em</dt><dd>{{ produto.criado_em|date:"d/m/Y" }}</dd></div>
+      </dl>
+
+      {% if user.is_authenticated %}
+      <div class="d-flex flex-wrap gap-2">
+        <a href="{% url 'produto_editar' produto.pk %}" class="btn btn-isaac">Editar</a>
+        <a href="{% url 'produto_excluir' produto.pk %}" class="btn btn-perigo">Excluir</a>
+      </div>
+      {% else %}
+      <p class="text-body-secondary">
+        <a href="{% url 'login' %}?next={{ request.path }}" class="link-osso">Entre</a> para editar ou excluir este item.
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

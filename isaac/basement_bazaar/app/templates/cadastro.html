@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Criar conta &mdash; Basement Bazaar{% endblock %}
+
+{% block content %}
+<section class="container secao">
+  <div class="caixa caixa-estreita form-isaac">
+    <h1 class="mb-4">Criar conta</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="btn btn-isaac w-100 mt-4">Criar conta</button>
+    </form>
+
+    <p class="mt-4 mb-0 text-body-secondary">
+      Já tem conta? <a href="{% url 'login' %}" class="link-osso">Entrar</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

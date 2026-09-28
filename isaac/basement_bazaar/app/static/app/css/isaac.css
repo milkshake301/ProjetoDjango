@@ -1,0 +1,166 @@
+/* Basement Bazaar — tema The Binding of Isaac sobre Bootstrap 5.3 (dark) */
+
+:root, [data-bs-theme="dark"] {
+  --porao: #150c0a;
+  --tijolo: #241612;
+  --tijolo-2: #33211b;
+  --osso: #ecdfc6;
+  --osso-suave: #b9a98d;
+  --sangue: #b3261e;
+  --sangue-escuro: #7d1712;
+  --lagrima: #8cc3e8;
+  --moeda: #e3b84c;
+  --contorno: #0a0504;
+
+  --bs-body-bg: var(--porao);
+  --bs-body-color: var(--osso);
+  --bs-body-font-family: "Alegreya Sans", system-ui, sans-serif;
+  --bs-body-font-size: 1.125rem;
+  --bs-link-color: var(--lagrima);
+  --bs-link-hover-color: #b7dcf3;
+  --bs-secondary-color: var(--osso-suave);
+  --bs-border-color: #4a2f27;
+}
+
+body {
+  line-height: 1.55;
+  /* piso do porão: manchas de luz + juntas das lajotas */
+  background-color: var(--porao);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -5%, #3d1b14 0, transparent 70%),
+    repeating-linear-gradient(0deg, transparent 0 79px, rgba(0,0,0,.28) 79px 80px),
+    repeating-linear-gradient(90deg, transparent 0 79px, rgba(0,0,0,.28) 79px 80px);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Pirata One", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: .02em;
+  line-height: 1.1;
+}
+h1 { font-size: clamp(2.1rem, 4.5vw, 3.2rem); }
+h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
+
+:focus-visible { outline: 3px solid var(--lagrima); outline-offset: 3px; }
+.pular:focus { position: fixed; top: .5rem; left: .5rem; z-index: 2000; background: var(--osso); color: var(--porao); padding: .5rem 1rem; }
+
+.link-osso { color: var(--osso); text-decoration-color: var(--sangue); text-underline-offset: 4px; }
+.link-osso:hover { color: #fff; }
+
+.secao { padding-block: 3rem 4rem; }
+
+/* ---------- Navbar e rodapé ---------- */
+.barra { background: var(--contorno); border-bottom: 3px solid var(--sangue-escuro); }
+.marca { font-family: "Pirata One", serif; font-size: 1.6rem; display: inline-flex; align-items: center; gap: .5rem; color: var(--osso); }
+.barra .nav-link { color: var(--osso-suave); }
+.barra .nav-link:hover, .barra .nav-link.active { color: var(--osso); }
+.barra .nav-link.active { text-decoration: underline; text-decoration-color: var(--sangue); text-underline-offset: 6px; text-decoration-thickness: 3px; }
+.rodape { background: var(--contorno); border-top: 3px solid var(--sangue-escuro); padding-block: 1.25rem; font-size: .95rem; color: var(--osso-suave); }
+
+/* ---------- Botões ---------- */
+.btn { font-weight: 700; border: 2px solid var(--contorno); border-radius: 4px; box-shadow: 3px 3px 0 var(--contorno); transition: transform .08s, box-shadow .08s; }
+.btn:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--contorno); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--contorno); }
+.btn-isaac { background: var(--sangue); color: #fff; }
+.btn-isaac:hover { background: #cc2f26; color: #fff; }
+.btn-osso { background: var(--osso); color: var(--contorno); }
+.btn-osso:hover { background: #fff; color: var(--contorno); }
+.btn-perigo { background: var(--tijolo-2); color: #ff9a92; border-color: var(--sangue-escuro); }
+.btn-perigo:hover { background: var(--sangue-escuro); color: #fff; }
+
+/* ---------- Hero e a única animação: as lágrimas ---------- */
+.hero { border-bottom: 3px solid var(--contorno); }
+.hero-grade { display: grid; grid-template-columns: 1.3fr .7fr; gap: 2rem; align-items: center; padding-block: 4.5rem; }
+.hero-titulo { max-width: 16ch; margin-bottom: 1.25rem; }
+.hero-texto { max-width: 52ch; color: var(--osso-suave); margin-bottom: 1.75rem; }
+
+.numeros { display: flex; gap: 2.5rem; margin: 2.5rem 0 0; }
+.numeros dt { font-weight: 400; color: var(--osso-suave); font-size: 1rem; }
+.numeros dd { font-family: "Pirata One", serif; font-size: 2.4rem; margin: 0; color: var(--moeda); line-height: 1; }
+
+.chorao { position: relative; height: 260px; overflow: hidden; }
+.gota { position: absolute; top: 0; left: var(--x); animation: cair 1.3s cubic-bezier(.5, 0, 1, .6) var(--d) both; }
+.poca { position: absolute; bottom: 14px; left: 14%; width: 72%; height: 26px; border-radius: 50%; border: 3px solid var(--contorno); background: #22475f; animation: poca .7s ease-out 1.3s both; }
+@keyframes cair { 0% { transform: translateY(-70px); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateY(190px); opacity: 0; } }
+@keyframes poca { from { transform: scale(.1); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ---------- Cards com pedestal ---------- */
+.item-card { display: flex; flex-direction: column; background: var(--tijolo); border: 3px solid var(--contorno); border-radius: 8px; box-shadow: 6px 6px 0 var(--contorno); overflow: hidden; }
+.palco { position: relative; display: flex; align-items: center; justify-content: center; height: 190px; padding-bottom: 26px; background: radial-gradient(circle at 50% 40%, #4a2a20 0, #1d100c 75%); border-bottom: 3px solid var(--contorno); color: var(--osso-suave); }
+.palco-grande { height: 380px; border: 3px solid var(--contorno); border-radius: 8px; box-shadow: 6px 6px 0 var(--contorno); }
+.palco-mini { height: 130px; border: 3px solid var(--contorno); border-radius: 8px; max-width: 220px; }
+.sprite { max-height: 96px; max-width: 96px; image-rendering: pixelated; position: relative; z-index: 1; margin-bottom: 8px; }
+.palco-grande .sprite { max-height: 190px; max-width: 190px; }
+.palco-mini .sprite { max-height: 64px; max-width: 64px; }
+.sprite-vazio { width: 84px; height: 84px; opacity: .75; }
+.palco-grande .sprite-vazio { width: 150px; height: 150px; }
+.pedestal { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); width: 46%; height: 20px; background: linear-gradient(#8a7a66 0 5px, #5b4d3f 5px); border: 3px solid var(--contorno); border-radius: 3px; }
+.palco-grande .pedestal { width: 34%; height: 30px; bottom: 20px; }
+.palco-mini .pedestal { height: 14px; bottom: 8px; }
+
+.item-corpo { display: flex; flex-direction: column; gap: .5rem; padding: 1rem 1.15rem 1.25rem; flex: 1; }
+.categoria { font-size: .95rem; color: var(--lagrima); }
+.item-nome { font-size: 1.6rem; margin: 0; }
+.item-nome a { color: var(--osso); text-decoration: none; }
+.item-nome a:hover { text-decoration: underline; text-decoration-color: var(--sangue); text-underline-offset: 4px; }
+.item-desc { color: var(--osso-suave); margin: 0; flex: 1; }
+.item-rodape { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin-top: .5rem; }
+.item-acoes { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.preco { font-family: "Pirata One", serif; font-size: 1.7rem; color: var(--moeda); }
+.preco abbr { text-decoration: none; }
+
+.selo { display: inline-block; font-size: .95rem; font-weight: 700; padding: .1rem .55rem; border: 2px solid var(--contorno); border-radius: 4px; }
+.selo-ok { background: #2f4a33; color: #d6f0d2; }
+.selo-pouco { background: #6b4a12; color: #ffe2a0; }
+.selo-esgotado { background: var(--sangue-escuro); color: #ffd6d2; }
+
+/* ---------- Detalhe ---------- */
+.detalhe { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 3rem; align-items: start; }
+.detalhe-desc { max-width: 56ch; font-size: 1.25rem; }
+.ficha { display: grid; gap: .25rem 2rem; margin: 1.5rem 0 2rem; }
+.ficha > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .55rem 0; border-bottom: 1px dashed #4a2f27; }
+.ficha dt { font-weight: 400; color: var(--osso-suave); }
+.ficha dd { margin: 0; }
+
+/* ---------- Caixas, formulários, filtros ---------- */
+.caixa { max-width: 640px; margin-inline: auto; background: var(--tijolo); border: 3px solid var(--contorno); border-radius: 8px; box-shadow: 6px 6px 0 var(--contorno); padding: 2rem; }
+.caixa-estreita { max-width: 480px; }
+.caixa-perigo { border-color: var(--sangue-escuro); }
+
+.form-isaac label { display: block; margin: 1rem 0 .3rem; font-weight: 700; }
+.form-isaac :is(input:not([type=checkbox]):not([type=hidden]), select, textarea) {
+  width: 100%; padding: .6rem .75rem; color: var(--osso); background: #0e0806;
+  border: 2px solid #5a3b31; border-radius: 4px; font: inherit;
+}
+.form-isaac :is(input, select, textarea):focus { border-color: var(--lagrima); outline: none; box-shadow: 0 0 0 3px rgba(140,195,232,.3); }
+.form-isaac p { margin: 0; }
+.form-isaac .helptext, .form-isaac .helptext ul { font-size: .95rem; color: var(--osso-suave); }
+.form-isaac ul:not(.errorlist) { padding-left: 1.1rem; margin: .3rem 0 0; }
+.form-isaac .errorlist { list-style: none; margin: .3rem 0 0; padding: 0; color: #ff9a92; font-weight: 700; }
+.preview { margin-top: 1rem; }
+
+.filtros { display: grid; grid-template-columns: 2fr 1fr auto; gap: 1rem; align-items: end; margin-bottom: 2.5rem; padding: 1rem 1.25rem 1.25rem; background: var(--tijolo); border: 3px solid var(--contorno); border-radius: 8px; }
+.filtros label { margin-top: 0; }
+.filtros-acoes { display: flex; gap: .5rem; }
+
+.vazio { text-align: center; padding: 3rem 1rem; border: 3px dashed #4a2f27; border-radius: 8px; color: var(--osso-suave); }
+.aviso { border: 2px solid var(--contorno); box-shadow: 3px 3px 0 var(--contorno); }
+
+/* ---------- Responsivo e movimento reduzido ---------- */
+@media (max-width: 991.98px) {
+  .hero-grade { grid-template-columns: 1fr; padding-block: 3rem; }
+  .chorao { display: none; }
+  .detalhe { grid-template-columns: 1fr; gap: 2rem; }
+  .palco-grande { height: 280px; }
+}
+@media (max-width: 767.98px) {
+  .filtros { grid-template-columns: 1fr; }
+  .numeros { gap: 1.5rem; }
+  .caixa { padding: 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gota { animation: none; opacity: 0; }
+  .poca { animation: none; }
+  .btn { transition: none; }
+}
