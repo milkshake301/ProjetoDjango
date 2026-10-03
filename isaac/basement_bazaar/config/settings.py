@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get(
 )
 
 DEBUG = False
-ALLOWED_HOSTS = ['Joaopecanhacorrea.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['joaopecanhacorrea.pythonanywhere.com', '127.0.0.1']
 
 ALLOWED_HOSTS = [h for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if h]
 
